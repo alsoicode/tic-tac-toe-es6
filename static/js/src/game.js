@@ -1,8 +1,9 @@
 var $ = require('jquery');
+import {Player} from './player';
 
 export class TicTacToe {
 
-    constructor() {
+    constructor(players) {
         this.board = $('#board');
         this.positions = this.board.find('td');
         this.message = $('.msg');
@@ -21,7 +22,7 @@ export class TicTacToe {
             [1, 5, 9], [3, 5, 7]
         ];
 
-        TicTacToe.sides = {
+        this.sides = {
             x: '<i class="fa fa-remove"></i>',
             o: '<i class="fa fa-circle-o"></i>'
         };
@@ -29,6 +30,10 @@ export class TicTacToe {
         this.resetControls.find('.btn').on('click', function() {
             this.reset();
         });
+
+        // set up players
+        this.player = new Player();
+        this.ai = new Player({ isAI: true });
 
         this.reset();
     }
@@ -40,6 +45,20 @@ export class TicTacToe {
         this.message.html('');
         this.instructions.html('');
         this.positions.html('').removeClass('selected win');
+
+        // this.play();
+    }
+
+    chooseSide() {
+        this.newGameControls.find('.btn').on('click', function(e) {
+            var target = $(e.currentTarget);
+            this.board.addClass('active');
+            this.player.side = target.val();
+            this.ai.side = this.player.side == 'x' ? 'o' : 'x';
+            this.resetControls.show();
+            this.newGameControls.hide();
+            this.instructions.html('Place an "' + this.activePlayer.side + '" in an open space by clicking or tapping on it.');
+        });
     }
 
 }
