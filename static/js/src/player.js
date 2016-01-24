@@ -1,8 +1,18 @@
 export class Player {
 
-    constructor(data) {
-        this.fullName = data.fullName || 'Player 1';
-        this.isAI = data.isAI || false;
+    constructor(opts) {
+        let options = opts || {
+            fullName: 'Player 1',
+            isAI: false
+        };
+
+        this.fullName = options.fullName;
+        this.isAI = options.isAI;
+
+        this.reset();
+    }
+
+    reset() {
         this.positions = [];
         this.side = null;
         this.winner = false;
