@@ -29,7 +29,7 @@ var gulp = require('gulp'),
 		],
 		less: staticRoot + 'less/',
 		css: staticRoot + 'css/',
-		browserifySrc: [jsRoot + 'src/game.js'],
+		browserifySrc: [jsRoot + 'src/app.js'],
 		jsDist: jsRoot + 'dist/'
 	};
 
