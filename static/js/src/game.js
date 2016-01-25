@@ -1,11 +1,10 @@
 var $ = require('jquery'),
     _ = require('underscore');
-import {Player} from './player';
 
 
 export class TicTacToe {
 
-    constructor(players) {
+    constructor(player, ai) {
         this.board = $('#board');
         this.positions = this.board.find('td');
         this.message = $('.msg');
@@ -35,8 +34,8 @@ export class TicTacToe {
         });
 
         // set up players
-        this.player = new Player();
-        this.ai = new Player({ isAI: true });
+        this.player = player;
+        this.ai = ai;
 
         // click handler to choose side for human player
         // this.newGameControls.find('.btn').on('click', this.chooseSide);
