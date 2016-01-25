@@ -1,4 +1,4 @@
-export class Player {
+class Player {
 
     constructor(opts) {
         let options = opts || {
@@ -19,3 +19,5 @@ export class Player {
     }
 
 }
+
+export default Player;

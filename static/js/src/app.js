@@ -1,6 +1,6 @@
 var $ = require('jquery');
-import {TicTacToe} from './game';
-import {Player} from './player';
+import TicTacToe from './game';
+import Player from './player';
 
 
 $(document).ready(function() {

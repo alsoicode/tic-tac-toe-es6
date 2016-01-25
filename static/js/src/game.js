@@ -2,7 +2,7 @@ var $ = require('jquery'),
     _ = require('underscore');
 
 
-export class TicTacToe {
+class TicTacToe {
 
     constructor(player, ai) {
         this.board = $('#board');
@@ -226,3 +226,5 @@ export class TicTacToe {
         }
     }
 }
+
+export default TicTacToe;
