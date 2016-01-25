@@ -115,7 +115,7 @@ export class TicTacToe {
 
         let comboIntersections = {};
 
-        _.each(this.winningCombinations, function(combo) {
+        _.each(this.winningCombos, (combo) => {
             let intersection = _.intersection(combo, this.player.positions),
                 comboIntersection = comboIntersections[intersection.length],
                 difference = _.difference(combo, intersection, this.ai.positions);
@@ -154,8 +154,8 @@ export class TicTacToe {
         }
         else {
             // if there is a combo with only one position left to win, choose it
-            for (var i = 0; i < this.winningCombinations.length; i++) {
-                var combo = this.winningCombinations[i],
+            for (var i = 0; i < this.winningCombos.length; i++) {
+                var combo = this.winningCombos[i],
                     intersection = _.intersection(combo, this.ai.positions),
                     difference = _.difference(combo, intersection, this.player.positions);
 
@@ -196,8 +196,8 @@ export class TicTacToe {
 
     checkWinner() {
         // compare activePlayer positions to winning combinations
-        for (var i = 0; i < this.winningCombinations.length; i++) {
-            var combo = this.winningCombinations[i];
+        for (var i = 0; i < this.winningCombos.length; i++) {
+            var combo = this.winningCombos[i];
 
             if (_.intersection(combo, this.activePlayer.positions).length === 3) {
                 this.activePlayer.winner = true;
