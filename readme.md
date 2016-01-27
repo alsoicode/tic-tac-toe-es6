@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-My take on the classic board game using the revealing module pattern.
+My take on the classic board game using ES6.
 
 ## Technologies Used
 - [Bootstrap](https://getbootstrap.com)
