@@ -194,25 +194,26 @@ class TicTacToe {
     }
 
     checkWinner() {
-        // compare activePlayer positions to winning combinations
-        for (var i = 0; i < this.winningCombos.length; i++) {
-            var combo = this.winningCombos[i];
-
-            if (_.intersection(combo, this.activePlayer.positions).length === 3) {
-                this.activePlayer.winner = true;
-                this.markWinningCombination(combo);
-                this.deactivateGame();
-                this.message.html(`${this.activePlayer.fullName} wins!`);
-                break;
-            }
-        }
-
         // Tie
         if (this.player.positions.length > 4 || this.ai.positions.length > 4) {
             this.board.addClass('tie');
             this.deactivateGame();
             this.message.html('Tie Game');
             this.instructions.html('Please try again!');
+        }
+        else {
+            // compare activePlayer positions to winning combinations
+            for (var i = 0; i < this.winningCombos.length; i++) {
+                var combo = this.winningCombos[i];
+
+                if (_.intersection(combo, this.activePlayer.positions).length === 3) {
+                    this.activePlayer.winner = true;
+                    this.markWinningCombination(combo);
+                    this.deactivateGame();
+                    this.message.html(`${this.activePlayer.fullName} wins!`);
+                    break;
+                }
+            }
         }
 
         // If not a winner, toggle the active player.

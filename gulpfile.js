@@ -14,9 +14,9 @@ var gulp = require('gulp'),
     buffer = require('vinyl-buffer'),
 	uglify = require('gulp-uglifyjs'),
 	concat = require('gulp-concat'),
-	mocha = require('gulp-mocha'),
 	rename = require('gulp-rename'),
     stripCode = require('gulp-strip-code'),
+    Karma = require('karma').Server;
 	staticRoot = 'static/',
 	jsRoot = staticRoot + 'js/',
 	nodeModulesRoot = 'node_modules/',
@@ -97,19 +97,11 @@ gulp.task('build', function(callback) {
 	callback();
 });
 
-gulp.task('test', function() {
-    return gulp.src('tests/*.js', { read: false })
-        .pipe(mocha({
-            ui: 'bdd',
-            reporter: 'nyan'
-        }))
-        .once('error', function(error) {
-			console.log(error);
-            process.exit(1);
-        })
-        .once('end', function() {
-            process.exit();
-        });
+gulp.task('test', function(done) {
+    new Karma({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done).start();
 });
 
 gulp.task('watch', function() {
@@ -117,6 +109,9 @@ gulp.task('watch', function() {
 	gulp.watch(jsRoot + 'src/*.js', ['build']).on('change', reportChange);
 });
 
-gulp.task('serve', serve('.'));
+gulp.task('serve', serve({
+	root: '.',
+	port: 9000
+}));
 
 gulp.task('default', ['watch', 'serve']);
