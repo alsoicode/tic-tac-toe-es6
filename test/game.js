@@ -1,5 +1,4 @@
-var assert = require('assert'),
-    jsdom = require('mocha-jsdom'),
+var jsdom = require('mocha-jsdom'),
     _ = require('underscore');
 
 import TicTacToe from '../static/js/src/game';

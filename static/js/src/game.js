@@ -38,7 +38,6 @@ class TicTacToe {
         this.ai = ai;
 
         // click handler to choose side for human player
-        // this.newGameControls.find('.btn').on('click', this.chooseSide);
         this.newGameControls.find('.btn').on('click', (event) => {
             this.chooseSide(event);
         });
