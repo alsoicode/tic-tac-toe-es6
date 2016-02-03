@@ -60,7 +60,6 @@ class TicTacToe {
 
         this.player.reset();
         this.ai.reset();
-        // this.play();
     }
 
     activateGame() {
