@@ -111,7 +111,7 @@ gulp.task('copy', function(callback) {
 });
 
 gulp.task('clean', function(callback) {
-	del('dist/*');
+	del('dist');
 	callback();
 });
 
