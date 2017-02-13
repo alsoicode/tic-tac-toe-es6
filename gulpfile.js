@@ -17,6 +17,9 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
     stripCode = require('gulp-strip-code'),
     Karma = require('karma').Server;
+	gulpCopy = require('gulp-copy'),
+	del = require('del'),
+	distRoot = 'dist/',
 	staticRoot = 'static/',
 	jsRoot = staticRoot + 'js/',
 	nodeModulesRoot = 'node_modules/',
@@ -69,7 +72,7 @@ gulp.task('compile-less', function() {
 });
 
 // Transpile ES6 and Browserify js source files
-gulp.task('build', function(callback) {
+gulp.task('transpile', function(callback) {
 	paths.browserifySrc.forEach(function(path) {
 		var filename = getFileName(path),
 			bundler = new browserify({ debug: true }),
@@ -97,6 +100,21 @@ gulp.task('build', function(callback) {
 	callback();
 });
 
+gulp.task('copy', function(callback) {
+	gulp.src('index.html').pipe(gulp.dest(distRoot));
+	gulp.src('static/css/*.css').pipe(gulp.dest(distRoot + 'static/css'));
+	gulp.src('static/images/*').pipe(gulp.dest(distRoot + 'static/images'));
+	gulp.src('static/js/dist/*.js').pipe(gulp.dest(distRoot + 'static/js/dist'));
+	gulp.src('static/js/dist/*.map.json').pipe(gulp.dest(distRoot + 'static/js/dist'));
+
+	callback();
+});
+
+gulp.task('clean', function(callback) {
+	del('dist/*');
+	callback();
+});
+
 gulp.task('test', function(done) {
     new Karma({
         configFile: __dirname + '/karma.conf.js',
@@ -114,4 +132,10 @@ gulp.task('serve', serve({
 	port: 9000
 }));
 
+gulp.task('serve-prod', serve({
+	root: 'dist',
+	port: 9000
+}));
+
 gulp.task('default', ['watch', 'serve']);
+gulp.task('build', ['transpile', 'copy']);
