@@ -78,11 +78,31 @@ h1 {
         cursor: crosshair;
         font-size: 10em;
         line-height: 140px;
+
+        max-height: 100px;
         min-height: 100px;
-        height: 33%;
-        vertical-align: middle;
+        height: 100px;
+
+        max-width: 100px;
         min-width: 100px;
-        width: 33%;
+        width: 100px;
+
+        vertical-align: middle;
+
+        @media(min-width: 768px) {
+            max-height: 200px;
+            min-height: 200px;
+            height: 200px;
+
+            max-width: 200px;
+            min-width: 200px;
+            width: 200px;
+        }
+
+        @media(max-width: 414px) {
+            font-size: 6em;
+            line-height: 90px;
+        }
 
         &.selected, &.win {
             cursor: not-allowed;
